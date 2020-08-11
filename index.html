@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+     <title>Local business generator</title>
+     <link rel="stylesheet" type="text/css" href="stylesheet.css">
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+
+<body>
+     <h1 id='header'>Local Business Generator</h1>
+
+     <div class='container'>
+          <div class='row'>
+               <div id='first_container' class='col-xl-6'>
+                    <h1>Input fields</h1>
+                    <form autocomplete="on">
+                         <div class="form-row">
+                              <div class="form-group col-md-6">
+                                   <!-- Name field -->
+                                   <label>Name</label>
+                                   <input type="text" class="form-control" id='field_1_input' onkeyup="real_time_change_name()">
+
+                                   <!-- Name field -->
+                                   <label>StreetAddress</label>
+                                   <input type="text" class="form-control" id='field_2_input' onkeyup="real_time_change_streetaddress()">
+
+                                   <!-- Name field -->
+                                   <label>AdressLocality</label>
+                                   <input type="text" class="form-control" id='field_3_input' onkeyup="real_time_change_addresslocality()">
+
+                                   <!-- Name field -->
+                                   <label>Postal Code</label>
+                                   <input type="text" class="form-control" id='field_4_input' onkeyup="real_time_change_postal()">
+                              </div>
+                              <div class="form-group col-md-6">
+                                   <!-- Name field -->
+                                   <label>Image</label>
+                                   <input type="text" class="form-control" id='field_5_input' onkeyup="real_time_change_image()">
+
+                                   <!-- Name field -->
+                                   <label>Email</label>
+                                   <input type="text" class="form-control" id='field_6_input' onkeyup="real_time_change_email()">
+
+                                   <!-- Name field -->
+                                   <label>Telephone</label>
+                                   <input type="text" class="form-control" id='field_7_input' onkeyup="real_time_change_tele()">
+
+                                   <!-- Name field -->
+                                   <label>URL</label>
+                                   <input type="text" class="form-control" id='field_8_input' onkeyup="real_time_change_url()">
+                              </div>
+                         </div>
+                         <button class='btn btn-success' onclick='add_extra();return false'>Add extra days</button>
+                         <button class='btn btn-success' onclick='extra_day_reset();return false'>Remove extra days</button>
+                         <div id='weekdays'>
+                              <label>Opening hours</label><br>
+                              <div class='weekdays row'>
+                                   <div class='col-xl-6'>
+                                        <input type="checkbox" class='weekday' value="Monday" onclick='show_weekdays()'>
+                                        <label for="checkbox1">Monday</label><br>
+
+                                        <input type="checkbox" class='weekday' value="Tuesday" onclick='show_weekdays()'>
+                                        <label for="checkbox2">Tuesday</label><br>
+
+                                        <input type="checkbox" class='weekday' value="Wednesday" onclick='show_weekdays()'>
+                                        <label for="checkbox3">Wednesday</label><br>
+
+                                        <input type="checkbox" class='weekday' value="Thursday" onclick='show_weekdays()'>
+                                        <label for="checkbox4">Thursday</label><br>
+                                   </div>
+                                   <div class='col-xl-6'>
+
+                                        <input type="checkbox" class='weekday' value="Friday" onclick='show_weekdays()'>
+                                        <label for="checkbox5">Friday</label><br>
+
+                                        <input type="checkbox" class='weekday' value="Saturday" onclick='show_weekdays()'>
+                                        <label for="checkbox4">Saturday</label><br>
+
+                                        <input type="checkbox" class='weekday' value="Sunday" onclick='show_weekdays()'>
+                                        <label for="checkbox5">Sunday</label><br>
+                                   </div>
+                              </div>
+                              <label>Opens and Closes (must be in format 00:00!)</label>
+                              <div class='row'>
+                                   <div class='col-xs-6'>
+                                        <input type="text" class='form-control time' onkeyup="show_time()" placeholder='Ex 08:00'>
+                                   </div>
+                                   <div class='col-xs-6'>
+                                        <input type="text" class='form-control time' onkeyup="show_time()" placeholder='Ex 16:00'>
+                                   </div>
+                              </div>
+                         </div>
+                         <div id='insert_extra_days'>
+
+                         </div>
+
+                         <label>PriceRange</label>
+                         <select onchange="real_time_change_priceRange()" name="pricerange" class="form-control" id="priceRange">
+                              <option value="$">$</option>
+                              <option value="$$">$$</option>
+                              <option value="$$$">$$$</option>
+                              <option value="$$$$">$$$$</option>
+                         </select>
+                         <!--Geolocation-->
+                         <h3>Geolocation</h3>
+                         <iframe id='iframe' height="400px" width="100%" frameborder="0" scrolling="no" src="https://developers-dot-devsite-v2-prod.appspot.com/maps/documentation/utils/geocoder">
+                         </iframe>
+                         <div class='row'>
+                              <div class='col-xs-6'>
+                                   <input type="text" class="form-control" id='lattitude' onkeyup="real_time_change_geo()" placeholder='Lattitude'>
+                              </div>
+                              <div class='col-xs-6'>
+                                   <input type="text" class="form-control" id='longtitude' onkeyup="real_time_change_geo()" placeholder='longtitude'>
+                              </div>
+                         </div>
+                         <button class='btn btn-success' onclick='add_schema_and_print();return false'>Add scheme</button>
+                    </form>
+
+
+               </div>
+               <div class='col-xl-6'>
+                    <h1>Live Schema</h1>
+                    <pre class='code_field'><code id = 'visuel_schema'>
+<span>&lt;script type="application/ld+json"&gt;</span>
+
+{
+"@context": "http://schema.org",
+"@type": "LocalBusiness",
+"name": "<span class = 'dynamic' id = 'field_1_output'></span>",
+"address": {
+"@type": "PostalAddress",
+"streetAddress": "<span class = 'dynamic' id = 'field_2_output'></span>",
+"addressLocality": "<span class = 'dynamic' id = 'field_3_output'></span>",
+"addressRegion": "",
+"postalCode": "<span class = 'dynamic' id = 'field_4_output'></span>"
+},
+"image": "<span class = 'dynamic' id = 'field_5_output'></span>",
+"email": "<span class = 'dynamic' id = 'field_6_output'></span>",
+"telePhone": "<span class = 'dynamic' id = 'field_7_output'></span>",
+"url": "<span class = 'dynamic' id = 'field_8_output'></span>",
+"paymentAccepted": [ "cash", "credit card" ],
+"openingHours": "<span class = 'dynamic' id = 'field_9_output'></span> <span class = 'dynamic' id = 'field_10_output'></span>",
+"openingHoursSpecification": [ {
+"@type": "OpeningHoursSpecification",
+"dayOfWeek": [
+<span class = 'dynamic' id = 'weekday_output'></span>
+],
+"opens": "<span class = 'dynamic time'></span>",
+"closes": "<span class = 'dynamic time'></span>"
+}<span id='show_extra_days'></span>],
+"geo": {
+"@type": "GeoCoordinates",
+"latitude": "<span class = 'dynamic' id = 'field_13_output'></span>",
+"longitude": "<span class = 'dynamic' id = 'field_14_output'></span>"
+},
+"priceRange":"<span class = 'dynamic' id = 'field_15_output'></span>"
+
+}
+<span>&lt;/script&gt;</span>
+		</code></pre>
+               </div>
+          </div>
+     </div>
+
+     <!-- Final schema -->
+     <div class='container'>
+          <h1> Result </h1>
+          <p id='button_final_t'><button id='copy' class='btn btn-primary'>Save to clipboard</button></p>
+          <pre class='code_field'><code id = 'final_schema'></code></pre>
+     </div>
+     <footer class='page-footer font-small blue pt-4'>Made by Mads Malling Petersen</footer>
+     <script type="text/javascript" src='javascript.js'></script>
+</body>
+
+</html>

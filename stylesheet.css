@@ -1,0 +1,81 @@
+body {
+     background-color:#7395AE !important;
+     margin:0%;
+}
+
+#header {
+     background-color:#5D5C61;
+     margin-bottom:5%;
+     text-align: center;
+     height:75px;
+     border-bottom:1px solid black;
+}
+
+.code_field {
+     background-color:#B0A295;
+     border:1px solid black;
+     padding-left:2%;
+     border-radius:10px;
+}
+
+form label {
+     font-size:18px;
+     margin:5px 0px 5px 0px;
+}
+.weekdays.row {
+     padding:1%;
+}
+
+.col-xs-6 {
+    margin-right: 5px;
+}
+
+.dynamic {
+     color:red;
+}
+
+.row {
+     margin-left: 0px !important;
+}
+
+#priceRange {
+     width:10%;
+}
+
+#first_container {
+     line-height: 13px;
+}
+
+#final_schema {
+     margin:1%;
+     width:50%;
+}
+
+.container h1,#button_final_t  {
+     text-align:center;
+}
+
+.btn-primary {
+     width:300px;
+     height:50px;
+}
+button.btn.btn-success{
+     margin-top:10px;
+}
+
+select#priceRange {
+     width: 100px;
+}
+
+/*Iframe*/
+#iframe {
+     margin-top:10px;
+     border:1px solid black;
+}
+
+footer {
+     background-color:black;
+     text-align: center;
+     padding-bottom:2%;
+     color:white;
+}
